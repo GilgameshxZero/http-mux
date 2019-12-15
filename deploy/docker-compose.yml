@@ -21,7 +21,7 @@ services:
       - ./letsencrypt:/etc/letsencrypt
     restart: always
   sish:
-    image: antoniomika/sish:latest
+    image: gilgameshxzero/http-mux:latest
     container_name: sish
     depends_on: 
       - letsencrypt
@@ -30,15 +30,11 @@ services:
       - ./pubkeys:/pubkeys
       - ./keys:/keys
     command: |
-      -sish.addr=:22
-      -sish.https=:443
-      -sish.http=:80
       -sish.httpsenabled=true
       -sish.httpspems=/etc/letsencrypt/live/$DOMAIN
       -sish.keysdir=/pubkeys
       -sish.pkloc=/keys/ssh_key
       -sish.bindrandom=false
       -sish.domain=$DOMAIN
-      -sish.forcerandomsubdomain=false
     network_mode: host
     restart: always

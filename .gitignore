@@ -5,6 +5,7 @@ pubkeys/*
 ssl/*
 !ssl/.gitkeep
 sish
+sish.exe
 deploy/*
 !deploy/docker-compose.yml
 dist/

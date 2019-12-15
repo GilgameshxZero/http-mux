@@ -284,7 +284,12 @@ func loadPrivateKey(passphrase string) ssh.Signer {
 	return signer
 }
 
+// also returns true if host is "localhost"
 func inBannedList(host string, bannedList []string) bool {
+	if "localhost" == host {
+		return true
+	}
+
 	for _, v := range bannedList {
 		if strings.TrimSpace(v) == host {
 			return true
@@ -297,13 +302,13 @@ func inBannedList(host string, bannedList []string) bool {
 func getOpenHost(addr string, state *State, sshConn *SSHConnection) string {
 	getUnusedHost := func() string {
 		first := true
-		host := strings.ToLower(addr + "." + *rootDomain)
+		host := strings.ToLower(addr)
 		getRandomHost := func() string {
 			return strings.ToLower(RandStringBytesMaskImprSrc(*domainLen) + "." + *rootDomain)
 		}
 		reportUnavailable := func(unavailable bool) {
 			if first && unavailable {
-				sendMessage(sshConn, aurora.Sprintf("The subdomain %s is unavaible. Assigning a random subdomain.", aurora.Red(host)), true)
+				sendMessage(sshConn, aurora.Sprintf("The domain %s is unavailable. Assigning a random subdomain.", aurora.Red(host)), true)
 			}
 		}
 
@@ -338,7 +343,7 @@ func getOpenAlias(addr string, port string, state *State, sshConn *SSHConnection
 		}
 		reportUnavailable := func(unavailable bool) {
 			if first && unavailable {
-				sendMessage(sshConn, aurora.Sprintf("The alias %s is unavaible. Assigning a random alias.", aurora.Red(alias)), true)
+				sendMessage(sshConn, aurora.Sprintf("The alias %s is unavailable. Assigning a random alias.", aurora.Red(alias)), true)
 			}
 		}
 
