@@ -297,14 +297,7 @@ func inBannedList(host string, bannedList []string) bool {
 func getOpenHost(addr string, state *State, sshConn *SSHConnection) string {
 	getUnusedHost := func() string {
 		first := true
-
-		hostExtension := ""
-		if *appendUserToSubdomain {
-			hostExtension = "-" + sshConn.SSHConn.User()
-		}
-
-		host := strings.ToLower(addr + hostExtension + "." + *rootDomain)
-
+		host := strings.ToLower(addr)
 		getRandomHost := func() string {
 			return strings.ToLower(RandStringBytesMaskImprSrc(*domainLen) + "." + *rootDomain)
 		}
@@ -345,7 +338,7 @@ func getOpenAlias(addr string, port string, state *State, sshConn *SSHConnection
 		}
 		reportUnavailable := func(unavailable bool) {
 			if first && unavailable {
-				sendMessage(sshConn, aurora.Sprintf("The alias %s is unavaible. Assigning a random alias.", aurora.Red(alias)), true)
+				sendMessage(sshConn, aurora.Sprintf("The alias %s is unavailable. Assigning a random alias.", aurora.Red(alias)), true)
 			}
 		}
 

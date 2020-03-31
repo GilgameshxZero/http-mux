@@ -44,10 +44,10 @@ var (
 	date                  = "unknown"
 	httpPort              int
 	httpsPort             int
-	serverAddr            = flag.String("sish.addr", "localhost:2222", "The address to listen for SSH connections")
-	httpAddr              = flag.String("sish.http", "localhost:80", "The address to listen for HTTP connections")
+	serverAddr            = flag.String("sish.addr", ":2222", "The address to listen for SSH connections")
+	httpAddr              = flag.String("sish.http", ":80", "The address to listen for HTTP connections")
 	httpPortOverride      = flag.Int("sish.httpport", 0, "The port to use for http command output")
-	httpsAddr             = flag.String("sish.https", "localhost:443", "The address to listen for HTTPS connections")
+	httpsAddr             = flag.String("sish.https", ":443", "The address to listen for HTTPS connections")
 	httpsPortOverride     = flag.Int("sish.httpsport", 0, "The port to use for https command output")
 	verifyOrigin          = flag.Bool("sish.verifyorigin", true, "Whether or not to verify origin on websocket connection")
 	verifySSL             = flag.Bool("sish.verifyssl", true, "Whether or not to verify SSL on proxy connection")
@@ -77,7 +77,7 @@ var (
 	debug                 = flag.Bool("sish.debug", false, "Whether or not to print debug information")
 	versionCheck          = flag.Bool("sish.version", false, "Print version and exit")
 	tcpAlias              = flag.Bool("sish.tcpalias", false, "Whether or not to allow the use of TCP aliasing")
-	logToClient           = flag.Bool("sish.logtoclient", false, "Whether or not to log http requests to the client")
+	logToClient           = flag.Bool("sish.logtoclient", true, "Whether or not to log http requests to the client")
 	idleTimeout           = flag.Int("sish.idletimeout", 5, "Number of seconds to wait for activity before closing a connection")
 	connectTimeout        = flag.Int("sish.connecttimeout", 5, "Number of seconds the ssh login process is allowed before closing a connection")
 	appendUserToSubdomain = flag.Bool("sish.appendusertosubdomain", false, "Whether or not to append the user to the subdomain")

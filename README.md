@@ -1,5 +1,10 @@
-sish
-====
+# http-mux
+
+A fork of `sish`. This fork allows multiplexing to any domain name, as well as changes some build and default options.
+
+Their readme is copied below.
+
+---
 
 An open source serveo/ngrok alternative.
 
